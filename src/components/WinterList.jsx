@@ -1,11 +1,14 @@
 import React from 'react'
+import WinterCard from './WinterCard';
 
-const WinterList = () => {
+const WinterList = (props) => {
   return (
-    <div>
-        
-    </div>
+   <div className="board-grid">
+            {props.list.map((item) => (
+               <WinterCard need={item} />
+            ))}
+        </div>
   )
-}
+};
 
 export default WinterList
