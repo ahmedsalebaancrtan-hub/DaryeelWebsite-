@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { winterNeeds } from "./data/WinterNeeds"
 import WinterList from "./components/WinterList"
+import ContributionForm from "./components/ContributionForm"
 
 function App() {
   const [needs, setNeeds] = useState(winterNeeds)
@@ -14,7 +15,9 @@ function App() {
       <p className="board-intro">
         Tracker {needs.length} winter needs this season
       </p>
-
+<section className="contribution-panel">
+  <ContributionForm  needs={needs}/>
+</section>
         <WinterList list={needs} />
        <footer className="board-footer">
           <p>
