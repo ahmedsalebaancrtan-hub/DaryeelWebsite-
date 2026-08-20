@@ -3,7 +3,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
-    name: z.string().min(1, "Name is required"),
+    name: z.string().min(2, "Name must be at least 2 characters long"),
 
     needId: z.string().min(1, "Item is required"),
 
@@ -13,7 +13,7 @@ const schema = z.object({
         .min(1, "Quantity must be at least 1"),
 });
 
-function ContributionForm({ needs }) {
+function ContributionForm({ needs, onNewPledge }) {
     const {
         register,
         handleSubmit,
@@ -28,8 +28,10 @@ function ContributionForm({ needs }) {
         },
     });
 
+
     const onSave = (data) => {
         console.log("Form data:", data);
+        onNewPledge(data);
 
         // Send data to your backend here
         // Example:
@@ -62,7 +64,7 @@ function ContributionForm({ needs }) {
                 />
 
                 {errors.name && (
-                    <p className="error">
+                    <p className="field-error">
                         {errors.name.message}
                     </p>
                 )}
@@ -89,7 +91,7 @@ function ContributionForm({ needs }) {
                 </select>
 
                 {errors.needId && (
-                    <p className="error">
+                    <p className="field-error">
                         {errors.needId.message}
                     </p>
                 )}
@@ -108,7 +110,7 @@ function ContributionForm({ needs }) {
                 />
 
                 {errors.quantity && (
-                    <p className="error">
+                    <p className="field-error">
                         {errors.quantity.message}
                     </p>
                 )}

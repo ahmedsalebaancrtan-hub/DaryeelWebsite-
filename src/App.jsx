@@ -2,9 +2,19 @@ import { useState } from "react"
 import { winterNeeds } from "./data/WinterNeeds"
 import WinterList from "./components/WinterList"
 import ContributionForm from "./components/ContributionForm"
+import PledgeList from "./components/PledgeList"
 
 function App() {
   const [needs, setNeeds] = useState(winterNeeds)
+  const [pledges, setPledges] = useState([])
+  console.log("Current pledges:", pledges)
+
+
+  const HandleNewPledge = (data) => {
+    console.log("New pledge received:", data)
+
+    setPledges((prevPledges) => [...prevPledges, data])
+  }
 
   return (
     <main className="board">
@@ -16,7 +26,8 @@ function App() {
         Tracker {needs.length} winter needs this season
       </p>
 <section className="contribution-panel">
-  <ContributionForm  needs={needs}/>
+  <ContributionForm  needs={needs} onNewPledge={HandleNewPledge} />
+  <PledgeList pledges={pledges} />
 </section>
         <WinterList list={needs} />
        <footer className="board-footer">
